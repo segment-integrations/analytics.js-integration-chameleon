@@ -1,4 +1,11 @@
 
+1.1.0 / 2016-02-03
+==================
+
+  * Merge pull request #1 from trychameleon/master
+  * Revert back to using the accountId.
+  * Update the configuration to request an accountToken
+
 1.0.4 / 2015-06-30
 ==================
 
