@@ -1,3 +1,4 @@
+'use strict';
 
 var Analytics = require('analytics.js-core').constructor;
 var integration = require('analytics.js-integration');
@@ -11,7 +12,7 @@ describe('Chameleon', function() {
   var analytics;
   var chameleon;
   var options = {
-    accountToken: 'AvyQ4N2p-FOb5ceEb3w0RT-segment-integration'
+    accountId: 'AvyQ4N2p-FOb5ceEb3w0RT-segment-integration'
   };
 
   beforeEach(function() {
@@ -38,7 +39,7 @@ describe('Chameleon', function() {
       .readyOnInitialize()
       .readyOnLoad()
       .global('chmln')
-      .option('accountToken', null));
+      .option('accountId', null));
   });
 
   describe('before loading', function() {
@@ -55,6 +56,10 @@ describe('Chameleon', function() {
       beforeEach(function() {
         analytics.initialize();
         analytics.page();
+      });
+
+      it('should add the account token', function() {
+        analytics.assert.equal(window.chmln.accountToken, options.accountId);
       });
 
       it('should load', function() {
