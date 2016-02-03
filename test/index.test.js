@@ -1,3 +1,4 @@
+'use strict';
 
 var Analytics = require('analytics.js-core').constructor;
 var integration = require('analytics.js-integration');
@@ -57,6 +58,10 @@ describe('Chameleon', function() {
         analytics.page();
       });
 
+      it('should add the account token', function() {
+        analytics.assert.equal(window.chmln.accountToken, options.accountId);
+      });
+
       it('should load', function() {
         analytics.called(chameleon.load);
       });
@@ -80,9 +85,9 @@ describe('Chameleon', function() {
       });
 
       it('should store the identify', function() {
-        analytics.assert(window.chmln.setup_a[0].length === 1);
+        analytics.assert(window.chmln.identify_a[0].length === 1);
 
-        analytics.assert.deepEqual({ uid: 'id' }, window.chmln.setup_a[0][0]);
+        analytics.assert.deepEqual({ uid: 'id' }, window.chmln.identify_a[0][0]);
       });
     });
 
@@ -128,27 +133,27 @@ describe('Chameleon', function() {
 
     describe('#identify', function() {
       beforeEach(function() {
-        analytics.spy(window.chmln, 'setup');
+        analytics.spy(window.chmln, 'identify');
       });
 
-      it('should setup with the anonymous user id', function() {
+      it('should identify with the anonymous user id', function() {
         analytics.identify();
-        analytics.called(window.chmln.setup, { uid: 'anon-id' });
+        analytics.called(window.chmln.identify, { uid: 'anon-id' });
       });
 
-      it('should setup with the given id', function() {
+      it('should identify with the given id', function() {
         analytics.identify('id');
-        analytics.called(window.chmln.setup, { uid: 'id' });
+        analytics.called(window.chmln.identify, { uid: 'id' });
       });
 
       it('should send traits', function() {
         analytics.identify({ trait: true });
-        analytics.called(window.chmln.setup, { uid: 'anon-id', trait: true });
+        analytics.called(window.chmln.identify, { uid: 'anon-id', trait: true });
       });
 
       it('should send the given id and traits', function() {
         analytics.identify('id', { trait: true });
-        analytics.called(window.chmln.setup, { uid: 'id', trait: true });
+        analytics.called(window.chmln.identify, { uid: 'id', trait: true });
       });
     });
 
