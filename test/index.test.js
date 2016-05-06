@@ -12,7 +12,7 @@ describe('Chameleon', function() {
   var analytics;
   var chameleon;
   var options = {
-    accountId: 'AvyQ4N2p-FOb5ceEb3w0RT-segment-integration'
+    apiKey: 'AvyQ4N2p-FOb5ceEb3w0RT-segment-integration'
   };
 
   beforeEach(function() {
@@ -39,7 +39,7 @@ describe('Chameleon', function() {
       .readyOnInitialize()
       .readyOnLoad()
       .global('chmln')
-      .option('accountId', null));
+      .option('apiKey', null));
   });
 
   describe('before loading', function() {
@@ -59,7 +59,7 @@ describe('Chameleon', function() {
       });
 
       it('should add the account token', function() {
-        analytics.assert.equal(window.chmln.accountToken, options.accountId);
+        analytics.assert.equal(window.chmln.accountToken, options.apiKey);
       });
 
       it('should load', function() {
