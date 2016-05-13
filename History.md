@@ -1,3 +1,9 @@
+
+1.1.2 / 2016-05-13
+==================
+
+  * Change accountId to apiKey because we are adding a direct integration component
+ 
 1.1.1 / 2016-05-07
 ==================
 
