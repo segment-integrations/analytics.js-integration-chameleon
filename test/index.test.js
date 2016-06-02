@@ -1,9 +1,9 @@
 'use strict';
 
-var Analytics = require('analytics.js-core').constructor;
-var integration = require('analytics.js-integration');
-var sandbox = require('clear-env');
-var tester = require('analytics.js-integration-tester');
+var Analytics = require('@segment/analytics.js-core').constructor;
+var integration = require('@segment/analytics.js-integration');
+var sandbox = require('@segment/clear-env');
+var tester = require('@segment/analytics.js-integration-tester');
 var Chameleon = require('../lib/');
 
 var noop = function() {};
@@ -31,6 +31,11 @@ describe('Chameleon', function() {
     chameleon.reset();
     analytics.user().reset();
     sandbox();
+  });
+
+  // FIXME: Chameleon freaks out after tests run
+  after(function() {
+    window.chmln = function() {};
   });
 
   it('should have the right settings', function() {
@@ -63,7 +68,11 @@ describe('Chameleon', function() {
       });
 
       it('should add the current location', function() {
-        analytics.assert.equal(/http:\/\/localhost:\d+\/test/.test(window.chmln.location), true);
+        var protocol = window.location.protocol;
+        var host = window.location.host;
+        var loc = new RegExp(protocol + '\/\/' + host + '\/');
+
+        analytics.assert.equal(loc.test(window.chmln.location), true);
       });
 
       it('should load', function() {
