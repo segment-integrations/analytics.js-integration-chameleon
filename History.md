@@ -1,4 +1,9 @@
 
+1.1.3 / 2016-06-06
+==================
+
+  * Ignore the rest of the Chameleon snippet when it's already on the page.
+
 1.1.2 / 2016-05-13
 ==================
 
