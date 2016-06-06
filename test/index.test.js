@@ -62,11 +62,34 @@ describe('Chameleon', function() {
         analytics.assert.equal(window.chmln.accountToken, options.apiKey);
       });
 
+      it('should add the current location', function() {
+        analytics.assert.equal(/http:\/\/localhost:\d+\/test/.test(window.chmln.location), true);
+      });
+
       it('should load', function() {
         analytics.called(chameleon.load);
       });
 
       it('should be ready', function() {
+        analytics.called(chameleon.ready);
+      });
+    });
+
+    describe('when chmln is already on the page', function() {
+      beforeEach(function() {
+        window.chmln = { root: 'DOM' };
+
+        analytics.initialize();
+        analytics.page();
+      });
+
+      it('should not add the info', function() {
+        analytics.assert.equal(window.chmln.accountToken, undefined);
+        analytics.assert.equal(window.chmln.location, undefined);
+      });
+
+      it('should continue as normal', function() {
+        analytics.called(chameleon.load);
         analytics.called(chameleon.ready);
       });
     });
