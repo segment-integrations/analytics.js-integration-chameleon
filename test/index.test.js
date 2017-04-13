@@ -35,7 +35,6 @@ describe('Chameleon', function() {
 
   it('should have the right settings', function() {
     analytics.compare(Chameleon, integration('Chameleon')
-      .assumesPageview()
       .readyOnInitialize()
       .readyOnLoad()
       .global('chmln')
