@@ -1,7 +1,7 @@
 {
-  "name": "analytics.js-integration-chameleon",
+  "name": "@segment/analytics.js-integration-chameleon",
   "description": "The Chameleon analytics.js integration.",
-  "version": "2.4.1",
+  "version": "2.0.0",
   "keywords": [
     "analytics.js",
     "analytics.js-integration",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/segment-integrations/analytics.js-integration-chameleon.git"
+    "url": "git+https://github.com/segment-integrations/analytics.js-integration-chameleon.git"
   },
   "author": "Segment <friends@segment.com>",
   "license": "SEE LICENSE IN LICENSE",
@@ -48,7 +48,6 @@
     "mocha": "^2.2.5",
     "npm-check": "^5.2.1",
     "phantomjs-prebuilt": "^2.1.7",
-    "to-array": "^0.1.4",
     "watchify": "^3.7.0"
   }
 }

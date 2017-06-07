@@ -21,7 +21,7 @@ module.exports = function(config) {
       mocha: {
         grep: process.env.GREP,
         reporter: 'html',
-        timeout: 80000
+        timeout: 10000
       }
     },
 

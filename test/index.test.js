@@ -33,6 +33,11 @@ describe('Chameleon', function() {
     sandbox();
   });
 
+  // FIXME: Chameleon freaks out after tests run
+  after(function() {
+    window.chmln = function() {};
+  });
+
   it('should have the right settings', function() {
     analytics.compare(Chameleon, integration('Chameleon')
       .readyOnInitialize()
@@ -62,7 +67,11 @@ describe('Chameleon', function() {
       });
 
       it('should add the current location', function() {
-        analytics.assert.equal(/http:\/\/localhost:\d+\//.test(window.chmln.location), true);
+        var protocol = window.location.protocol;
+        var host = window.location.host;
+        var loc = new RegExp(protocol + '\/\/' + host + '\/');
+
+        analytics.assert.equal(loc.test(window.chmln.location), true);
       });
 
       it('should load', function() {
