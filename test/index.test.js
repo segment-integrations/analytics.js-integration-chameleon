@@ -161,6 +161,22 @@ describe('Chameleon', function() {
       });
     });
 
+    describe('#group', function() {
+      beforeEach(function() {
+        analytics.stub(window.chmln, 'set');
+      });
+
+      it('should send an id', function() {
+        analytics.group('12');
+        analytics.called(window.chmln.set, { company: { uid: '12' } });
+      });
+
+      it('should send traits', function() {
+        analytics.group('13', { trait: true });
+        analytics.called(window.chmln.set, { company: { uid: '13', trait: true } });
+      });
+    });
+
     describe('#track', function() {
       beforeEach(function() {
         analytics.stub(window.chmln, 'track');
@@ -174,6 +190,23 @@ describe('Chameleon', function() {
       it('should send an event and properties', function() {
         analytics.track('event', { property: true });
         analytics.called(window.chmln.track, 'event', { property: true });
+      });
+    });
+
+    describe('#alias', function() {
+      beforeEach(function() {
+        analytics.user().anonymousId('anon-id');
+        analytics.stub(window.chmln, 'alias');
+      });
+
+      it('should send a new id', function() {
+        analytics.alias('new');
+        analytics.called(window.chmln.alias, { from: 'anon-id', to: 'new' });
+      });
+
+      it('should send a new and old id', function() {
+        analytics.alias('new', 'old');
+        analytics.called(window.chmln.alias, { from: 'old', to: 'new' });
       });
     });
   });
