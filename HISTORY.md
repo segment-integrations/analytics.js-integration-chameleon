@@ -1,10 +1,15 @@
+2.0.1 / 2017-06-14
+==================
+
+  * When adding a group, add the 'company' info to the user.
+  * Remove the need for the `page()` function to be called.
+
 2.0.0 / 2016-06-21
 ==================
 
   * Remove Duo compatibility
   * Add CI setup (coverage, linting, cross-browser compatibility, etc.)
   * Update eslint configuration
-
 
 1.1.3 / 2016-06-06
 ==================

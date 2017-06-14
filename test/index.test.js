@@ -40,7 +40,6 @@ describe('Chameleon', function() {
 
   it('should have the right settings', function() {
     analytics.compare(Chameleon, integration('Chameleon')
-      .assumesPageview()
       .readyOnInitialize()
       .readyOnLoad()
       .global('chmln')
@@ -117,35 +116,8 @@ describe('Chameleon', function() {
       });
 
       it('should store the identify', function() {
-        analytics.assert(window.chmln.identify_a[0].length === 1);
-
-        analytics.assert.deepEqual({ uid: 'id' }, window.chmln.identify_a[0][0]);
-      });
-    });
-
-    describe('on alias', function() {
-      describe('with the new id', function() {
-        beforeEach(function() {
-          analytics.alias('new');
-        });
-
-        it('should store the alias', function() {
-          analytics.assert(window.chmln.alias_a[0].length === 1);
-
-          analytics.assert.deepEqual({ from: 'anon-id', to: 'new' }, window.chmln.alias_a[0][0]);
-        });
-      });
-
-      describe('with the both old and new id', function() {
-        beforeEach(function() {
-          analytics.alias('new', 'old');
-        });
-
-        it('should store the alias', function() {
-          analytics.assert(window.chmln.alias_a[0].length === 1);
-
-          analytics.assert.deepEqual({ from: 'old', to: 'new' }, window.chmln.alias_a[0][0]);
-        });
+        analytics.assert.equal(Array.prototype.slice.call(window.chmln.identify_a).length, 1);
+        analytics.assert.equal('id', window.chmln.identify_a[0][0]);
       });
     });
   });
@@ -168,24 +140,24 @@ describe('Chameleon', function() {
         analytics.spy(window.chmln, 'identify');
       });
 
-      it('should identify with the anonymous user id', function() {
+      it('should identify with no id', function() {
         analytics.identify();
-        analytics.called(window.chmln.identify, { uid: 'anon-id' });
+        analytics.called(window.chmln.identify, null, {});
       });
 
       it('should identify with the given id', function() {
         analytics.identify('id');
-        analytics.called(window.chmln.identify, { uid: 'id' });
+        analytics.called(window.chmln.identify, 'id');
       });
 
       it('should send traits', function() {
         analytics.identify({ trait: true });
-        analytics.called(window.chmln.identify, { uid: 'anon-id', trait: true });
+        analytics.called(window.chmln.identify, null, { trait: true });
       });
 
       it('should send the given id and traits', function() {
         analytics.identify('id', { trait: true });
-        analytics.called(window.chmln.identify, { uid: 'id', trait: true });
+        analytics.called(window.chmln.identify, 'id', { trait: true });
       });
     });
 
@@ -195,18 +167,13 @@ describe('Chameleon', function() {
       });
 
       it('should send an id', function() {
-        analytics.group('id');
-        analytics.called(window.chmln.set, { 'group:id': 'id' });
+        analytics.group('12');
+        analytics.called(window.chmln.set, { company: { uid: '12' } });
       });
 
       it('should send traits', function() {
-        analytics.group({ trait: true });
-        analytics.called(window.chmln.set, { 'group:id': null, 'group:trait': true });
-      });
-
-      it('should send an id and traits', function() {
-        analytics.group('id', { trait: true });
-        analytics.called(window.chmln.set, { 'group:id': 'id', 'group:trait': true });
+        analytics.group('13', { trait: true });
+        analytics.called(window.chmln.set, { company: { uid: '13', trait: true } });
       });
     });
 

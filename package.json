@@ -1,7 +1,7 @@
 {
   "name": "@segment/analytics.js-integration-chameleon",
   "description": "The Chameleon analytics.js integration.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "keywords": [
     "analytics.js",
     "analytics.js-integration",
@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/segment-integrations/analytics.js-integration-chameleon#readme",
   "dependencies": {
-    "@ndhoule/each": "^2.0.1",
     "@segment/analytics.js-integration": "^2.1.0"
   },
   "devDependencies": {

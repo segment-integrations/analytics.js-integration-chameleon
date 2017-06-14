@@ -58,12 +58,11 @@ var customLaunchers = {
     base: 'SauceLabs',
     browserName: 'internet explorer',
     version: '11'
+  },
+  sl_edge_latest: {
+    base: 'SauceLabs',
+    browserName: 'microsoftedge'
   }
-  // FIXME(ndhoule): Did not pass on master pre-Browserify, throws strange errors
-  // sl_edge_latest: {
-  //   base: 'SauceLabs',
-  //   browserName: 'microsoftedge'
-  // }
 };
 
 module.exports = function(config) {
